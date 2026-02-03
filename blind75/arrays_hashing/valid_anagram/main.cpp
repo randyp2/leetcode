@@ -6,22 +6,21 @@ class Solution {
     // Space complexity O(1): At most can be 26 characters so space is not
     // dynamic
     bool isAnagram(std::string s, std::string t) {
+        // Anagrams if they have the same frequency of letters
+        if (s.length() == t.length())
+            return true;
 
-        if (s.length() != t.length())
-            return false;
-
-        // Construct frequency hashmaps for each string
         std::unordered_map<char, int> s_map;
         std::unordered_map<char, int> t_map;
 
-        // Init hashmaps
-        // Time complexity O(n)
-        for (char c : s)
-            s_map[c]++;
+        // Populate maps
+        for (char ch : s) {
+            s_map[ch]++;
+        }
 
-        // Time complexity O(n)
-        for (char c : t)
-            t_map[c]++;
+        for (char ch : t) {
+            s_map[ch]++;
+        }
 
         return s_map == t_map;
     }

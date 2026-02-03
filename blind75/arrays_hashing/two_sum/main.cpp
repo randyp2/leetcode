@@ -6,21 +6,18 @@
 class Solution {
   public:
     std::vector<int> twoSum(std::vector<int> &nums, int target) {
+        if (nums.size() == 1 && nums[0])
+            return {};
 
-        // num -> idx
-        // Space complxity: O(n)
+        // Map number to their index
         std::unordered_map<int, int> m;
 
-        // Time complxity: O(n)
         for (int i = 0; i < nums.size(); ++i) {
             int diff = target - nums[i];
 
-            std::cout << "Diff: " << diff << std::endl;
             if (m.find(diff) != m.end())
-                return {i, m[diff]};
+                return {m[diff], i};
 
-            std::cout << "Inserting: " << nums[i] << " with index: " << i
-                      << std::endl;
             m[nums[i]] = i;
         }
 

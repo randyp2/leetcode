@@ -26,17 +26,16 @@ class Solution {
 
     bool containsDuplicate(std::vector<int> &nums) {
 
-        if (nums.size() == 1)
+        if (nums.size() == 0 || nums.size() == 1)
             return false;
 
         std::unordered_set<int> s;
 
         for (int num : nums) {
-            if (s.find(num) == s.end()) {
+            if (s.find(num) == s.end())
                 s.insert(num);
-            } else {
+            else
                 return true;
-            }
         }
 
         return false;

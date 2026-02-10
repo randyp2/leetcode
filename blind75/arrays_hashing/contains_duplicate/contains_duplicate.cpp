@@ -4,7 +4,6 @@
 #include <vector>
 
 class Solution {
-
   public:
     // Time complexity: O(nlogn) Space complexity: O(1)
     // bool containsDuplicate(std::vector<int> &nums) {

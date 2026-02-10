@@ -1,3 +1,4 @@
+#include <array>
 #include <iostream>
 #include <stdexcept>
 #include <vector>
@@ -8,14 +9,76 @@ class Solution {
      *
      * Output: [48,24,12,8]
      *
+     * Construct prefix and suffix araray
      *
+     * Runtime to construct: O(n)
+     * Prefix - Holds products before i
+     * Suffix - Holds suffxi after i
+     *
+     * Creates extra space O(n)
+     *
+     *
+     * --- By using resultng array as a prefix and suffix holder
+     *  we save space
      *
      */
 
   public:
     std::vector<int> productExceptSelf(std::vector<int> &nums) {
 
-        throw std::runtime_error("Function not implemented");
+        // const int N = nums.size();
+        //
+        // // Construct prefix & suffix
+        // std::vector<int> prefix(N, 0);
+        // prefix[0] = 1;
+        //
+        // std::vector<int> suffix(N, 0);
+        // suffix[N - 1] = 1;
+        //
+        // // Prefix
+        // // Nums = [3, 2, 4, 5]
+        // // Prefix = [1, 3, 6, 24]
+        // for (int i = 1; i < N; ++i)
+        //     prefix[i] = nums[i - 1] * prefix[i - 1];
+        //
+        // // Suffix
+        // // Nums = [3, 2, 4, 5]
+        // // Suffix = [40, 20, 5, 1]
+        // for (int i = N - 2; i >= 0; --i)
+        //     suffix[i] = nums[i + 1] * suffix[i + 1];
+        //
+        // // Construct answer
+        // std::vector<int> res(N);
+        //
+        // for (int i = 0; i < N; ++i)
+        //     res[i] = suffix[i] * prefix[i];
+        //
+        // return res;
+
+        // =========================
+        // What if you can use the result array as your prefix & suffix array
+        // =========================
+        const int N = nums.size();
+
+        // Store product before idx i into result array
+        std::vector<int> res(N);
+        res[0] = 1;
+
+        // Nums = [3, 2, 4, 5]
+        // res = [1, 3, 6, 24]
+        for (int i = 1; i < N; ++i)
+            res[i] = nums[i - 1] * res[i - 1];
+
+        // Calculate products after idx i
+        // Nums = [3, 2, 4, 5]
+        // res = [1, 3, 6, 24]
+        int rightProduct = 1;
+        for (int i = N - 1; i >= 0; --i) {
+            res[i] *= rightProduct;
+            rightProduct *= nums[i];
+        }
+
+        return res;
     }
 
     // Use division operator
@@ -108,6 +171,17 @@ int main() {
     std::cout << "Output 3: \n";
     sol.printAns(
         sol.productExceptSelfDivision(input3)); // FAIL!! MULTIPEL ZEROES CASE
+
+    /* ============= SUFFIX AND PREFFIX ============= */
+    std::cout << "------- SUFFIX AND PREFIX -------\n";
+    std::cout << "Output 1: \n";
+    sol.printAns(sol.productExceptSelf(input1));
+
+    std::cout << "Output 2: \n";
+    sol.printAns(sol.productExceptSelf(input2));
+
+    std::cout << "Output 3: \n";
+    sol.printAns(sol.productExceptSelf(input3)); // FAIL!! MULTIPEL ZEROES CASE
 
     return 0;
 }

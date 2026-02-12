@@ -54,7 +54,7 @@ class Solution {
         //  -> if num - 1 is not in set -> starting interval
         int max_len = 0;
 
-        throw std::runtime_error("Function not implemented yet");
+        // throw std::runtime_error("Function not implemented yet");
     }
 };
 

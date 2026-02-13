@@ -51,8 +51,28 @@ class Solution {
 
         // Count longest length
         // How to keep track of starting interval?
-        //  -> if num - 1 is not in set -> starting interval
+        //  - if num - 1 is not in set -> starting interval
         int max_len = 0;
+        for (int num : nums) {
+
+            int count = 1;
+            int next_sequential_num = num + 1;
+
+            // Check for start of interval
+            if (s.find(num - 1) != s.end())
+                continue;
+
+            while (s.find(next_sequential_num) != s.end()) {
+                count++;
+                next_sequential_num++;
+            }
+
+            // Check for new max length
+            if (count > max_len)
+                max_len = count;
+        }
+
+        return max_len;
 
         // throw std::runtime_error("Function not implemented yet");
     }

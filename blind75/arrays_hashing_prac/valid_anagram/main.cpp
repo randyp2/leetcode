@@ -1,28 +1,38 @@
 #include <iostream>
+#include <stdexcept>
 #include <unordered_map>
 
 class Solution {
   public:
-    bool isAnagram(std::string s, std::string t) {
-
-        if (s.length() != t.length())
+    /**
+     * @brief Determine if two strings are anagram
+     * Two strings are valid anagrams <=> they have same amount of chars
+     *
+     * @param first string
+     * @param second string to compare
+     *
+     * @return bool -> valid anagarm
+     */
+    bool validAnagram(std::string t, std::string s) {
+        if (t.length() != s.length())
             return false;
 
-        // Create frequency maps for the characters of each string
-        std::unordered_map<char, int> s_map;
         std::unordered_map<char, int> t_map;
-
-        for (char c : s)
-            s_map[c]++;
+        std::unordered_map<char, int> s_map;
 
         for (char c : t)
             t_map[c]++;
 
-        return s_map == t_map;
+        for (char c : t)
+            t_map[c]++;
+
+        return t_map == s_map;
+
+        throw std::runtime_error("Function not implemented yet");
     }
 };
 
 int main() {
-    std::cout << "=== Valid Anagram ===\n";
+    std::cout << "--- GROUP ANAGRAMS ---\n";
     return 0;
 }

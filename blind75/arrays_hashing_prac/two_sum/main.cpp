@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 #include <unordered_map>
 #include <vector>
 
@@ -10,20 +11,19 @@ class Solution {
         std::unordered_map<int, int> m;
 
         for (int i = 0; i < N; ++i) {
-            int diff = target - nums[i];
+            int curr_num = nums[i];
+            int diff = target - curr_num;
 
-            if (m.find(diff) == m.end())
-                m[nums[i]] = i;
+            if (m.find(curr_num) == m.end())
+                m[curr_num] = i;
             else
-                return {m[diff], i};
+                return {m[curr_num], i};
         }
-
         return {};
     }
 };
 
 int main() {
     std::cout << "--- TWO SUM ---\n";
-
     return 0;
 }

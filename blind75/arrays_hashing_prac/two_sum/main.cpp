@@ -14,12 +14,13 @@ class Solution {
             int curr_num = nums[i];
             int diff = target - curr_num;
 
-            if (m.find(curr_num) == m.end())
-                m[curr_num] = i;
-            else
+            if (m.find(diff) != m.end())
                 return {m[curr_num], i};
+
+            m[curr_num] = i;
         }
-        return {};
+
+        throw std::runtime_error("Function not implemented yet...");
     }
 };
 

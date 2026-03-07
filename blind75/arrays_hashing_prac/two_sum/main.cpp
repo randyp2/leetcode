@@ -16,9 +16,11 @@ class Solution {
 
             if (m.find(curr_num) != m.end())
                 return {m[curr_num], i};
+
             m[curr_num] = i;
         }
 
+        return {};
         throw std::runtime_error("Function not implemented yet...");
     }
 };

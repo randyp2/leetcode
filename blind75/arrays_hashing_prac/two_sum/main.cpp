@@ -3,12 +3,10 @@
 #include <unordered_map>
 #include <vector>
 
-class Solution {
-
+class Soluton {
   public:
     std::vector<int> twoSum(std::vector<int> &nums, int target) {
-
-        const size_t N = nums.size();
+        const int N = nums.size();
         std::unordered_map<int, int> m;
 
         for (int i = 0; i < N; ++i) {
@@ -19,10 +17,7 @@ class Solution {
                 return {m[diff], i};
             m[curr_num] = i;
         }
-
         return {};
-
-        throw std::runtime_error("Function not implemented yet...");
     }
 };
 

@@ -53,7 +53,7 @@ class Solution {
         // How to keep track of starting interval?
         //  - if num - 1 is not in set -> starting interval
         int max_len = 0;
-        for (int num : nums) {
+        for (int num : s) {
 
             int count = 1;
             int next_sequential_num = num + 1;

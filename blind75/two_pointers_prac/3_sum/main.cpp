@@ -1,44 +1,42 @@
 #include <iostream>
-#include <vector>
+#include <stdexcept>
 
 class Solution {
   public:
     std::vector<std::vector<int>> threeSum(std::vector<int> &nums) {
+        const int N = nums.size();
+
+        std::vector<std::vector<int>> res;
 
         std::sort(nums.begin(), nums.end());
-        const int N = nums.size();
-        std::vector<std::vector<int>> res;
 
         for (int i = 0; i < N; ++i) {
 
-            int curr_num = nums[i];
-            int target = 0 - curr_num;
-
-            if (i != 0 && nums[i - 1] == nums[i])
+            // Skippping over duplicates
+            if (i != 0 && nums[i] == nums[i - 1])
                 continue;
 
+            int new_target = 0 - nums[i];
+
+            // Initiate two pointer approach
             int l = i + 1;
             int r = N - 1;
+
             while (l < r) {
+                int sum = nums[l] + nums[r];
 
-                int left_num = nums[l];
-                int right_num = nums[r];
-                int sum = left_num + right_num;
+                // If sum = new_target -> record answer
+                if (sum == new_target) {
+                    res.push_back({nums[i], nums[l], nums[r]});
 
-                if (sum == target) {
-
-                    res.push_back({curr_num, left_num, right_num});
-
-                    int next_left = nums[l + 1];
-                    int next_right = nums[r - 1];
-                    while (l < r && left_num == next_left)
-                        left_num = nums[++l];
-                    while (l < r && right_num == next_right)
-                        right_num = nums[--r];
+                    while (l < r && nums[l] == nums[l + 1])
+                        ++l;
+                    while (l < r && nums[r] == nums[r - 1])
+                        --r;
 
                     ++l;
                     --r;
-                } else if (sum < target) {
+                } else if (sum < new_target) {
                     ++l;
                 } else {
                     --r;
@@ -47,10 +45,11 @@ class Solution {
         }
 
         return res;
-    }
+        throw std::runtime_error("Function not implemented yet...");
+    };
 };
 
 int main() {
-    std::cout << "--- 3Sum ---\n";
+    std::cout << "--- THREE SUM ---\n";
     return 0;
 }

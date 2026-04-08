@@ -3,24 +3,22 @@
 #include <unordered_set>
 #include <vector>
 
-class Solution {
+class Solutino {
 
   public:
-    bool containsDuplicate(std::vector<int> &nums) {
-
-        const int N = nums.size();
+    bool hasDuplicate(std::vector<int> &nums) {
 
         std::unordered_set<int> s;
-
         for (int num : nums) {
             if (s.find(num) != s.end())
                 return true;
+
             s.insert(num);
         }
 
         return false;
 
-        throw std::runtime_error("Function not implemented yet...");
+        throw std::runtime_error("Function not implemented...");
     }
 };
 

@@ -4,36 +4,50 @@
 #include <vector>
 
 class Solution {
+    /**
+     *
+     * RUNTIMES
+     *  - (SORTING OPTION): O(nlogn)
+     *  - (UNORDERD SET): O(n)
+     *
+     * Why on leetcode sorting option runs after?
+     *  - Because of the overhead using an unorderd_set
+     *  - Sorting uses just a vector that utilizes spatial locality
+     *  - unorderd_set involves pointer chasing, rehashing and so on
+     */
   public:
     // Time complexity: O(nlogn) Space complexity: O(1)
-    // bool containsDuplicate(std::vector<int> &nums) {
-    //
-    //     if (nums.size() == 1)
-    //         return false;
-    //
-    //     // Sort nums
-    //     std::sort(nums.begin(), nums.end());
-    //
-    //     // Iterate & Compare adjacent values
-    //     for (int i = 0; i < nums.size() - 1; ++i) {
-    //         if (nums[i] == nums[i + 1])
-    //             return true;
-    //     }
-    //
-    //     return false;
-    // }
+    bool containsDuplicate2(std::vector<int> &nums) {
+
+        if (nums.size() == 1)
+            return false;
+
+        // Sort nums
+        std::sort(nums.begin(), nums.end());
+
+        // Iterate & Compare adjacent values
+        for (int i = 0; i < nums.size() - 1; ++i) {
+            if (nums[i] == nums[i + 1])
+                return true;
+        }
+
+        return false;
+    }
 
     bool containsDuplicate(std::vector<int> &nums) {
 
-        if (nums.size() == 0 || nums.size() == 1)
-            return false;
-
+        const int N = nums.size();
         std::unordered_set<int> s;
+        s.reserve(N); // Reserve space to avoid rehashing due to load factor
 
         for (int num : nums) {
-            if (s.find(num) == s.end())
-                s.insert(num);
-            else
+            // Returns pair:
+            //  * first -> iterator pionting to inserted number
+            //  * second -> boolean: false -> num already exists, true -> num
+            //  doesn't exist
+            auto [it, inserted] = s.insert(num); // use structured binding
+
+            if (!inserted)
                 return true;
         }
 

@@ -3,26 +3,42 @@
 #include <unordered_set>
 #include <vector>
 
-class Solutino {
+class Solution {
 
   public:
-    bool hasDuplicate(std::vector<int> &nums) {
+    /**
+     *
+     * RUNTIMES
+     *  - (SORTING OPTION): O(nlogn)
+     *  - (UNORDERD SET): O(n)
+     *
+     * Why on leetcode sorting option runs after?
+     *  - Because of the overhead using an unorderd_set
+     *  - Sorting uses just a vector that utilizes spatial locality
+     *  - unorderd_set involves pointer chasing, rehashing and so on
+     */
+    bool containsDuplicate(std::vector<int> &nums) {
 
+        const int N = nums.size();
         std::unordered_set<int> s;
-        for (int num : nums) {
-            if (s.find(num) != s.end())
-                return true;
+        s.reserve(N); // Reserve space to avoid rehashing due to load factor
 
-            s.insert(num);
+        for (int num : nums) {
+            // Returns pair:
+            //  * first -> iterator pionting to inserted number
+            //  * second -> boolean: false -> num already exists, true -> num
+            //  doesn't exist
+            auto [it, inserted] = s.insert(num); // use structured binding
+
+            if (!inserted)
+                return true;
         }
 
         return false;
-
-        throw std::runtime_error("Function not implemented...");
     }
 };
 
 int main() {
     std::cout << "--- CONTAINS DUPLICATE ---\n";
     return 0;
-}
+};

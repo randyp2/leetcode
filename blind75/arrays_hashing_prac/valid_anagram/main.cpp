@@ -1,26 +1,48 @@
+#include <array>
 #include <iostream>
-#include <stdexcept>
 #include <unordered_map>
 
 class Solution {
   public:
+    /**
+     * Create ferquency arrays and incr and decr based on s and t characters
+     * More memory efficient.
+     * Uses spatial locality more than unorderd_map
+     */
     bool isAnagram(std::string s, std::string t) {
 
-        if (s.length() != t.length())
+        if (s.size() != t.size())
             return false;
 
-        std::unordered_map<int, int> s_map;
-        std::unordered_map<int, int> t_map;
+        std::array<int, 26> freq;
 
-        for (char c : s)
-            s_map[c]++;
+        const int N = s.size();
 
-        for (char c : t)
-            t_map[c]++;
+        for (int i = 0; i < N; ++i) {
+            const char s_char = s[i];
+            const char t_char = t[i];
 
-        return s_map == t_map;
+            // If anagrams these should cancel it out
+            freq[s_char - 'a']++;
+            freq[t_char - 'a']--;
+        }
 
-        throw std::runtime_error("Function not implemented yet...");
+        // Freq array shuld be all 0's if true anagrams
+        for (int num : freq) {
+            if (num != 0)
+                return false;
+        }
+
+        return true;
+    }
+
+    bool isAnagram2(std::string s, std::string t) {
+
+        // Sort both strings
+        std::sort(s.begin(), s.end());
+        std::sort(t.begin(), t.end());
+
+        return s == t;
     }
 };
 

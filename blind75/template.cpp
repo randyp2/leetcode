@@ -1,12 +1,11 @@
 #include <iostream>
-#include <stdexcept>
 
 class Solution {
 
-public:
+  public:
 };
 
 int main() {
-  std::cout << "--- CONTAINS DUPLICATE ---\n";
-  return 0;
+    std::cout << "--- ---\n";
+    return 0;
 };

@@ -9,8 +9,7 @@ class Solution {
         const size_t N = nums.size();
 
         // Build the left_product within the answer array
-        std::vector<int> ans(N);
-        ans[0] = 1;
+        std::vector<int> ans(N, 1);
         for (size_t i = 1; i < N; ++i)
             ans[i] = ans[i - 1] * nums[i - 1];
 
@@ -28,15 +27,13 @@ class Solution {
         const size_t N = nums.size();
 
         // Build the left product
-        std::vector<int> left_product(N);
-        left_product[0] = 1;
+        std::vector<int> left_product(N, 1);
         for (size_t i = 1; i < N; ++i) {
             left_product[i] = left_product[i - 1] * nums[i - 1];
         }
 
         // Build the right product
-        std::vector<int> right_product(N);
-        right_product[N - 1] = 1;
+        std::vector<int> right_product(N, 1);
         for (int i = N - 2; i >= 0; --i) {
             std::cout << "i: " << i << " of N: " << N << "\n";
             right_product[i] = right_product[i + 1] * nums[i + 1];

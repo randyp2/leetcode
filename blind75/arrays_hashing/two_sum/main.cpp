@@ -8,6 +8,7 @@ class Solution {
     std::vector<int> twoSum(std::vector<int> &nums, int target) {
 
         std::unordered_map<int, int> m; // maps number: index
+        m.reserve(nums.size());
 
         for (int i = 0; i < nums.size(); ++i) {
             int curr_num = nums[i];

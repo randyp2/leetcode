@@ -3,6 +3,7 @@
 class Solution {
 
   public:
+    // throw std::runtime_error("Function not implmented yet...");
 };
 
 int main() {

@@ -18,7 +18,7 @@ class Solution {
         s_set.insert(s[l]);
 
         int max_len = 0;
-        while (r < N) {
+        while (r < N) { // O(n)
             auto [it, inserted] = s_set.insert(s[r]);
             bool repeat = !inserted;
 

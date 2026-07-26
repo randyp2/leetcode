@@ -9,7 +9,7 @@ class Solution {
             return nums[0];
 
         int l = 0;
-        int r = nums.size();
+        int r = nums.size() - 1;
 
         while (l < r) {
             int m = l + (r - l) / 2;

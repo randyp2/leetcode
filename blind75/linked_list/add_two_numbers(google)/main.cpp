@@ -31,8 +31,8 @@ class Solution {
             carry_value = tens_unit;
 
             temp = temp->next;
-            l1 = l1 : l1->next : nullptr;
-            l2 = l2 : l2->next : nullptr;
+            l1 = l1 ? l1->next : nullptr;
+            l2 = l2 ? l2->next : nullptr;
         }
 
         ListNode *dummy = ans;

@@ -7,35 +7,24 @@ class Solution {
     int lengthOfLongestSubstring(std::string s) {
         const std::size_t N = s.length();
         if (N <= 1)
-            return s.length();
+            return N;
 
-        std::unordered_set<char> s_set;
+        std::unordered_set<int> set;
 
         int l = 0;
-        int r = 1;
+        int ans = 0;
+        for (int r = 0; r < N; ++r) {
 
-        // init set with curr pointers
-        s_set.insert(s[l]);
-
-        int max_len = 0;
-        while (r < N) { // O(n)
-            auto [it, inserted] = s_set.insert(s[r]);
-            bool repeat = !inserted;
-
-            while (repeat) {
-                s_set.erase(s[l]);
+            while (set.contains(s[r])) {
+                set.erase(s[l]);
                 ++l;
-
-                const auto [it2, inserted2] = s_set.insert(s[r]);
-                if (inserted2)
-                    repeat = false;
             }
 
-            max_len = std::max(max_len, r - l);
-            ++r;
+            set.insert(s[r]);
+            ans = std::max(ans, r - l + 1);
         }
 
-        return max_len + 1;
+        return ans;
     }
 };
 

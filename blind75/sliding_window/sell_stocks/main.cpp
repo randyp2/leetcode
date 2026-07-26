@@ -1,4 +1,3 @@
-#include <algorithm>
 #include <iostream>
 #include <vector>
 
@@ -10,18 +9,18 @@ class Solution {
         if (N == 1)
             return 0;
 
+        int max_profit = -1;
         int l = 0;
-        int r = 1;
-        int max_profit = 0;
-        while (r < N) {
+
+        for (int r = 1; r < N; ++r) {
             int curr_profit = prices[r] - prices[l];
-            max_profit = std::max(curr_profit, max_profit);
             if (curr_profit < 0)
                 l = r;
-            ++r;
+
+            max_profit = std::max(max_profit, curr_profit);
         }
 
-        return max_profit;
+        return max_profit < 0 ? 0 : max_profit;
     }
 };
 

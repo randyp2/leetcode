@@ -45,10 +45,9 @@ class Solution {
                             std::min(A_right, B_right)) /
                            2.0;
             } else {
-                // Decrease left partition in A arrray
-                if (A_left > B_right)
+                if (A_left > B_right) // Decrease left partition in A arrray
                     high = i - 1;
-                else
+                else // Increase partition in A array
                     low = i + 1;
             }
         }
